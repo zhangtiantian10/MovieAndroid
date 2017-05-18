@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_page"
+            android:title="主页" />
+        <item
+            android:id="@+id/edit_studio"
+            android:title="演出厅管理" />
+        <item
+            android:id="@+id/edit_schedule"
+            android:title="演出计划管理" />
+        <item
+            android:id="@+id/edit_play"
+            android:title="剧目管理" />
+        <item
+            android:id="@+id/edit_employee"
+            android:title="员工管理" />
+        <item
+            android:id="@+id/person"
+            android:title="个人中心" />
+    </group>
+</menu>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#3F51B5">
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="18dp"
+            android:text="取消"
+            android:id="@+id/cancel"
+            android:textColor="#fff"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="编辑"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#fff"/>
+        <TextView
+            android:layout_width="43dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="18dp"
+            android:text="完成"
+            android:textColor="#fff"
+            android:id="@+id/saved"/>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/line1"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="1dp"
+
+        android:background="#abb1b3"
+        android:layout_marginTop="20dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/employee_image"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="头像"
+            android:textSize="17dp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/employee_image"
+            android:src="@drawable/head"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/employee_name"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="姓名"
+            android:textSize="17dp"/>
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/employee_name"
+            android:textSize="17dp"
+            android:background="@null"
+            android:textColor="#000"
+            android:textCursorDrawable="@null"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/employee_number"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="工号"
+            android:textSize="17dp"/>
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/employee_number"
+            android:textSize="17dp"
+            android:background="@null"
+            android:textColor="#000"
+            android:textCursorDrawable="@null"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/employee_sex"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="性别"
+            android:textSize="17dp"/>
+        <EditText
+            android:id="@+id/sex"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/employee_sex"
+            android:textSize="17dp"
+            android:background="@null"
+            android:textColor="#000"
+            android:textCursorDrawable="@null"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/employee_password"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="密码"
+            android:textSize="17dp"/>
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/employee_password"
+            android:textSize="17dp"
+            android:background="@null"
+            android:textColor="#000"
+            android:textCursorDrawable="@null"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/employee_position"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="职务"
+            android:textSize="17dp"/>
+        <EditText
+            android:id="@+id/position"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/employee_position"
+            android:textSize="17dp"
+            android:background="@null"
+            android:textColor="#000"
+            android:textCursorDrawable="@null"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/employee_tel_number"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="电话"
+            android:textSize="17dp"/>
+        <EditText
+            android:id="@+id/tel_number"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/employee_tel_number"
+            android:textSize="17dp"
+            android:background="@null"
+            android:textColor="#000"
+            android:textCursorDrawable="@null"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/employee_address"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="住址"
+            android:textSize="17dp"/>
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/employee_address"
+            android:textSize="17dp"
+            android:background="@null"
+            android:textColor="#000"
+            android:textCursorDrawable="@null"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"/>
+
+</LinearLayout>
