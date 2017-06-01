@@ -5,7 +5,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +17,17 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 /**
  * Created by 97557 on 2017/4/8.
@@ -62,15 +76,16 @@ public class EmployeeInfoActivity extends AppCompatActivity {
         textTelNumber = (TextView) findViewById(R.id.tel_number);
         textAddress = (TextView) findViewById(R.id.address);
         textPassword = (TextView) findViewById(R.id.password);
-
-        displayEmployeeInfo();
+        bundle = this.getIntent().getExtras();
+        new Thread(getEmployee).start();
+//        displayEmployeeInfo();
     }
 
     public void displayEmployeeInfo() {
         bundle = this.getIntent().getExtras();
         int image = bundle.getInt("image");
         int id = bundle.getInt("id");
-
+        new Thread(getEmployee).start();
         Cursor cursor = db.rawQuery("select * from employees where id=" + id + "", null);
 
         if (cursor.moveToNext() == false) {
@@ -93,6 +108,67 @@ public class EmployeeInfoActivity extends AppCompatActivity {
         textSex.setText(sex);
         textPassword.setText(password);
     }
+
+    Runnable getEmployee = new Runnable() {
+        @Override
+        public void run() {
+            Message msg = new Message();
+            int id = bundle.getInt("id");
+            String path = "http://192.168.1.41:81/ServerTry/employee?id=" + id;
+
+            try {
+                HttpGet request = new HttpGet(path);
+                HttpClient client = new DefaultHttpClient();
+                HttpResponse response = client.execute(request);
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    String strResult = EntityUtils.toString(response.getEntity());
+                    Bundle data = new Bundle();
+                    data.putString("value", strResult);
+                    msg.setData(data);
+                    handler.sendMessage(msg);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+    Handler handler = new android.os.Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            String val = data.getString("value");
+            JSONArray array = null;
+            int image = bundle.getInt("image");
+
+            try {
+                array = new JSONArray(val);
+                JSONObject object = (JSONObject) array.get(0);
+                String name = object.getString("name");
+                String number = object.getString("number");
+                String address = object.getString("addr");
+                String sex = object.getString("sex");
+                String position = object.getString("position");
+                String telNumber = object.getString("telNumber");
+                String password = object.getString("password");
+
+                imageView.setImageResource(image);
+                textName.setText(name);
+                textNumber.setText(number);
+                textAddress.setText(address);
+                textTelNumber.setText(telNumber);
+                textPosition.setText(position);
+                textSex.setText(sex);
+                textPassword.setText(password);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.i("员工详细信息", "请求结果为-->" + val);
+            // TODO
+            // UI界面的更新等相关操作
+        }
+    };
+
 
     View.OnClickListener popClick = new View.OnClickListener() {
         @Override
