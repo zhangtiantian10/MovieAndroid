@@ -22,6 +22,7 @@
             android:textColor="#000"
             android:text="文字"
             />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

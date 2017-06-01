@@ -12,6 +12,7 @@ public class ListBean {
     private String password;
     private int image;
 
+
     public ListBean() {
     }
 
@@ -94,4 +95,6 @@ public class ListBean {
     public void setImage(int image) {
         this.image = image;
     }
+
+
 }

@@ -28,6 +28,7 @@
         <activity android:name=".EmployeeInfoActivity"></activity>
         <activity android:name=".ModifyEmployeeActivity"></activity>
         <activity android:name=".InsertEmployeeActivity"></activity>
+
     </application>
 
 </manifest>

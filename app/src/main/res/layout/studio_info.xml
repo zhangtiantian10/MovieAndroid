@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#3F51B5">
+
+        <ImageView
+            android:id="@+id/back_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="个人资料"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
+        <!--<TextView-->
+        <!--android:id="@+id/edit_text"-->
+        <!--android:layout_width="43dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginRight="0dp"-->
+        <!--android:layout_marginTop="18dp"-->
+        <!--android:text="编辑"-->
+        <!--android:textColor="#fff" />-->
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/dian"
+            android:id="@+id/three_points"/>
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/studio_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/s04" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="13dp" />
+
+        <TextView
+            android:id="@+id/employee_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="信息"
+            android:textColor="#000"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="13dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/line1"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="1dp"
+
+        android:background="#abb1b3"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/studio_number"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="放映厅"
+            android:textSize="17dp"/>
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/studio_number"
+            android:text="1号"
+            android:textSize="17dp"
+            android:textColor="#000" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/studio_seats"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="座位数"
+            android:textSize="17dp"/>
+        <TextView
+            android:id="@+id/sex"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/studio_seats"
+            android:text="100"
+            android:textSize="17dp"
+            android:textColor="#000" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/studio_row"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="行数"
+            android:textSize="17dp"/>
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/studio_row"
+            android:text="10"
+            android:textSize="17dp"
+            android:textColor="#000" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/studio_column"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="列数"
+            android:textSize="17dp"/>
+
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="10"
+            android:textSize="17dp"
+            android:textColor="#000"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/studio_column"
+            android:layout_toEndOf="@+id/studio_column" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/studio_movie"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="放映电影"
+            android:textSize="17dp"/>
+        <TextView
+            android:id="@+id/tel_number"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/studio_movie"
+            android:text="嘻嘻"
+            android:textSize="17dp"
+            android:textColor="#000" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"/>
+
+</LinearLayout>

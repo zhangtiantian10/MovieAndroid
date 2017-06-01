@@ -26,10 +26,13 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="13dp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dian"
+            android:id="@+id/three_points"/>
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="edit studio"/>
+    <ListView
+        android:id="@+id/studio_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
 </LinearLayout>
