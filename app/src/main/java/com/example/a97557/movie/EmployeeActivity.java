@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +22,16 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +67,8 @@ public class EmployeeActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.employee_list);
 
-        listBeans = getListBeans();
+//        listBeans = getListBeans();
+        new Thread(getAllEmployees).start();
         setListViewEvent();
     }
 
@@ -164,6 +178,8 @@ public class EmployeeActivity extends AppCompatActivity {
 
     public List<ListBean> getListBeans() {
 
+        new Thread(getAllEmployees).start();
+
         List<ListBean> lists = new ArrayList<>();
         Cursor cursor = db.rawQuery("select * from employees", null);
         while (true) {
@@ -205,6 +221,66 @@ public class EmployeeActivity extends AppCompatActivity {
         });
     }
 
+    Runnable getAllEmployees = new Runnable() {
+        @Override
+        public void run() {
+            Message msg = new Message();
+            try {
+                String path = "http://192.168.1.41:81/ServerTry/allEmployees";
+                HttpGet httpRequest = new HttpGet(path);
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpResponse httpResponse = httpclient.execute(httpRequest);
+                if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                    String strResult = EntityUtils.toString(httpResponse.getEntity());
+                    Bundle data = new Bundle();
+                    data.putString("value", strResult);
+                    msg.setData(data);
+                    handler.sendMessage(msg);
+                }
+                Log.i("返回", "zhengqu");
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            String val = data.getString("value");
+            JSONArray array = null;
+            List<ListBean> lists = new ArrayList<>();
+
+            try {
+                array = new JSONArray(val);
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject object = (JSONObject) array.get(i);
+                    ListBean listBean = new ListBean();
+                    listBean.setId(Integer.parseInt(object.getString("number")));
+                    listBean.setImage(R.drawable.head);
+                    listBean.setName(object.getString("name"));
+                    listBean.setEmployeeNumber(object.getString("number"));
+                    listBean.setEmployeePosition(object.getString("position"));
+                    listBean.setAddress(object.getString("addr"));
+                    listBean.setEmployeeSex(object.getString("sex"));
+                    listBean.setEmployeeAge(25);
+                    listBean.setTelNumber(object.getString("telNumber"));
+                    listBean.setPassword(object.getString("password"));
+                    lists.add(listBean);
+                }
+                listBeans = lists;
+                setListViewEvent();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.i("所有员工", "请求结果为-->" + val);
+            // TODO
+            // UI界面的更新等相关操作
+        }
+    };
+
     private void getPopupWindow() {
         if (null != popupWindow) {
             popupWindow.dismiss();
@@ -216,7 +292,8 @@ public class EmployeeActivity extends AppCompatActivity {
 
     protected void onRestart() {
         super.onRestart();
-        listBeans = getListBeans();
+//        listBeans = getListBeans();
+        new Thread(getAllEmployees).start();
         setListViewEvent();
     }
 }
