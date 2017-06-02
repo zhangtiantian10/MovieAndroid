@@ -43,7 +43,7 @@ public class EmployeeActivity extends AppCompatActivity {
     private ImageView imageView, ponitView;
     private ListView listView;
     private ListViewAdapter listViewAdapter;
-    private List<ListBean> listBeans = new ArrayList<>();
+    private List<Employee> employees = new ArrayList<>();
     private SQLiteDatabase db;
     private PopupWindow popupWindow;
 
@@ -67,7 +67,7 @@ public class EmployeeActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.employee_list);
 
-//        listBeans = getListBeans();
+//        employees = getEmployees();
         new Thread(getAllEmployees).start();
         setListViewEvent();
     }
@@ -75,24 +75,24 @@ public class EmployeeActivity extends AppCompatActivity {
     class ListViewAdapter extends BaseAdapter {
 
         private Context context;
-        private List<ListBean> listBeans;
+        private List<Employee> employees;
 
         //构造方法
-        public ListViewAdapter(Context context,List<ListBean> listBeans){
+        public ListViewAdapter(Context context,List<Employee> employees){
             this.context = context;
-            this.listBeans = listBeans;
+            this.employees = employees;
         }
 
         //获取list的item的个数
         @Override
         public int getCount() {
-            return listBeans.size();
+            return employees.size();
         }
 
         //获取position位置的item的数据
         @Override
         public Object getItem(int position) {
-            return listBeans.get(position);
+            return employees.get(position);
         }
         //获取position位置的item
         @Override
@@ -118,9 +118,9 @@ public class EmployeeActivity extends AppCompatActivity {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             //设置item控件数据的绑定
-            viewHolder.imageView.setImageResource(listBeans.get(position).getImage());
-            viewHolder.textView.setText(listBeans.get(position).getName());
-            viewHolder.subscriptView.setText(listBeans.get(position).getEmployeeNumber() + "");
+            viewHolder.imageView.setImageResource(employees.get(position).getImage());
+            viewHolder.textView.setText(employees.get(position).getName());
+            viewHolder.subscriptView.setText(employees.get(position).getEmployeeNumber() + "");
             return convertView;
         }
         public class ViewHolder {
@@ -176,35 +176,35 @@ public class EmployeeActivity extends AppCompatActivity {
         });
     }
 
-    public List<ListBean> getListBeans() {
+    public List<Employee> getEmployees() {
 
         new Thread(getAllEmployees).start();
 
-        List<ListBean> lists = new ArrayList<>();
+        List<Employee> lists = new ArrayList<>();
         Cursor cursor = db.rawQuery("select * from employees", null);
         while (true) {
             if (cursor.moveToNext() == false) {
                 break;
             }
-            ListBean listBean = new ListBean();
-            listBean.setId(cursor.getInt(0));
-            listBean.setImage(R.drawable.head);
-            listBean.setName(cursor.getString(1).toString());
-            listBean.setEmployeeNumber(cursor.getString(2).toString());
-            listBean.setEmployeePosition(cursor.getString(5).toString());
-            listBean.setAddress(cursor.getString(7).toString());
-            listBean.setEmployeeSex(cursor.getString(3).toString());
-            listBean.setEmployeeAge(25);
-            listBean.setTelNumber(cursor.getString(6).toString());
-            listBean.setPassword(cursor.getString(4).toString());
-            lists.add(listBean);
+            Employee employee = new Employee();
+            employee.setId(cursor.getInt(0));
+            employee.setImage(R.drawable.head);
+            employee.setName(cursor.getString(1).toString());
+            employee.setEmployeeNumber(cursor.getString(2).toString());
+            employee.setEmployeePosition(cursor.getString(5).toString());
+            employee.setAddress(cursor.getString(7).toString());
+            employee.setEmployeeSex(cursor.getString(3).toString());
+            employee.setEmployeeAge(25);
+            employee.setTelNumber(cursor.getString(6).toString());
+            employee.setPassword(cursor.getString(4).toString());
+            lists.add(employee);
         }
 
         return lists;
     }
 
     public void setListViewEvent() {
-        listViewAdapter = new ListViewAdapter(this,listBeans);
+        listViewAdapter = new ListViewAdapter(this, employees);
 
         listView.setAdapter(listViewAdapter);
         //ListView的点击事件
@@ -213,8 +213,8 @@ public class EmployeeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(EmployeeActivity.this, EmployeeInfoActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("image", listBeans.get(position).getImage());
-                bundle.putInt("id", listBeans.get(position).getId());
+                bundle.putInt("image", employees.get(position).getImage());
+                bundle.putInt("id", employees.get(position).getId());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -251,26 +251,26 @@ public class EmployeeActivity extends AppCompatActivity {
             Bundle data = msg.getData();
             String val = data.getString("value");
             JSONArray array = null;
-            List<ListBean> lists = new ArrayList<>();
+            List<Employee> lists = new ArrayList<>();
 
             try {
                 array = new JSONArray(val);
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object = (JSONObject) array.get(i);
-                    ListBean listBean = new ListBean();
-                    listBean.setId(Integer.parseInt(object.getString("emp_id")));
-                    listBean.setImage(R.drawable.head);
-                    listBean.setName(object.getString("emp_name"));
-                    listBean.setEmployeeNumber(object.getString("emp_id"));
-                    listBean.setEmployeePosition(object.getString("emp_position"));
-                    listBean.setAddress(object.getString("emp_addr"));
-                    listBean.setEmployeeSex(object.getString("emp_sex"));
-                    listBean.setEmployeeAge(25);
-                    listBean.setTelNumber(object.getString("emp_tel_num"));
-                    listBean.setPassword(object.getString("emp_password"));
-                    lists.add(listBean);
+                    Employee employee = new Employee();
+                    employee.setId(Integer.parseInt(object.getString("emp_id")));
+                    employee.setImage(R.drawable.head);
+                    employee.setName(object.getString("emp_name"));
+                    employee.setEmployeeNumber(object.getString("emp_id"));
+                    employee.setEmployeePosition(object.getString("emp_position"));
+                    employee.setAddress(object.getString("emp_addr"));
+                    employee.setEmployeeSex(object.getString("emp_sex"));
+                    employee.setEmployeeAge(25);
+                    employee.setTelNumber(object.getString("emp_tel_num"));
+                    employee.setPassword(object.getString("emp_password"));
+                    lists.add(employee);
                 }
-                listBeans = lists;
+                employees = lists;
                 setListViewEvent();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -292,7 +292,7 @@ public class EmployeeActivity extends AppCompatActivity {
 
     protected void onRestart() {
         super.onRestart();
-//        listBeans = getListBeans();
+//        employees = getEmployees();
         new Thread(getAllEmployees).start();
         setListViewEvent();
     }
