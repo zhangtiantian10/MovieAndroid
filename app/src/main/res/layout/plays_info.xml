@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="90dp"
+        android:src="@drawable/head"
+        android:id="@+id/play_image"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="星球大战"
+            android:id="@+id/play_name"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="喜剧"
+            android:id="@+id/play_type"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="国语"
+            android:id="@+id/play_language"/>
+    </LinearLayout>
+</LinearLayout>
