@@ -164,8 +164,6 @@ public class EmployeeInfoActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             Log.i("员工详细信息", "请求结果为-->" + val);
-            // TODO
-            // UI界面的更新等相关操作
         }
     };
 
