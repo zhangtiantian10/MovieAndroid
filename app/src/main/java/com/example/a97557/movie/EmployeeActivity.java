@@ -226,7 +226,7 @@ public class EmployeeActivity extends AppCompatActivity {
         public void run() {
             Message msg = new Message();
             try {
-                String path = "http://192.168.1.41:81/ServerTry/allEmployees";
+                String path = "http://115.159.82.119:8080/Movie/employee/EmployeeQueryAll";
                 HttpGet httpRequest = new HttpGet(path);
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpResponse httpResponse = httpclient.execute(httpRequest);
@@ -258,16 +258,16 @@ public class EmployeeActivity extends AppCompatActivity {
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object = (JSONObject) array.get(i);
                     ListBean listBean = new ListBean();
-                    listBean.setId(Integer.parseInt(object.getString("number")));
+                    listBean.setId(Integer.parseInt(object.getString("emp_id")));
                     listBean.setImage(R.drawable.head);
-                    listBean.setName(object.getString("name"));
-                    listBean.setEmployeeNumber(object.getString("number"));
-                    listBean.setEmployeePosition(object.getString("position"));
-                    listBean.setAddress(object.getString("addr"));
-                    listBean.setEmployeeSex(object.getString("sex"));
+                    listBean.setName(object.getString("emp_name"));
+                    listBean.setEmployeeNumber(object.getString("emp_id"));
+                    listBean.setEmployeePosition(object.getString("emp_position"));
+                    listBean.setAddress(object.getString("emp_addr"));
+                    listBean.setEmployeeSex(object.getString("emp_sex"));
                     listBean.setEmployeeAge(25);
-                    listBean.setTelNumber(object.getString("telNumber"));
-                    listBean.setPassword(object.getString("password"));
+                    listBean.setTelNumber(object.getString("emp_tel_num"));
+                    listBean.setPassword(object.getString("emp_password"));
                     lists.add(listBean);
                 }
                 listBeans = lists;
