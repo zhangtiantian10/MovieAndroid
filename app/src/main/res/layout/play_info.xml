@@ -6,30 +6,34 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#3F51B5">
+
         <ImageView
+            android:id="@+id/back_image"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="13dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/back"
-            android:id="@+id/back_image"/>
+            android:layout_marginTop="13dp"
+            android:background="@drawable/back" />
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="剧目管理"
-            android:textSize="20dp"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#fff"/>
-        <ImageView
+            android:text="影片信息"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+        <ImageButton
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="13dp"
-            android:layout_marginRight="10dp" />
-    </LinearLayout>
-    <ListView
+            android:background="@drawable/dian"
+            android:id="@+id/three_points"/>
+        </LinearLayout>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/play_list"></ListView>
+        android:id="@+id/play_id"/>
 </LinearLayout>

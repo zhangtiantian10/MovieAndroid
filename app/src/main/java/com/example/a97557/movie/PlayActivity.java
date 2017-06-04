@@ -1,11 +1,13 @@
 package com.example.a97557.movie;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -45,11 +47,25 @@ public class PlayActivity extends AppCompatActivity {
             play.setName("星球大战");
             play.setLanguage("国语");
             play.setType("喜剧");
+            play.setId(i);
             plays.add(play);
         }
 
         playsListViewAdapter = new PlayListViewAdapter(this, plays);
         listView.setAdapter(playsListViewAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent in = new Intent(PlayActivity.this, PlayInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("image", plays.get(position).getImageId());
+                bundle.putInt("id", plays.get(position).getId());
+                in.putExtras(bundle);
+                startActivity(in);
+            }
+        });
     }
 
     public class PlayViewHolder {
