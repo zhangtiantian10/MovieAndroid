@@ -2,7 +2,6 @@ package com.example.a97557.movie;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -86,27 +85,6 @@ public class EmployeeInfoActivity extends AppCompatActivity {
         int image = bundle.getInt("image");
         int id = bundle.getInt("id");
         new Thread(getEmployee).start();
-        Cursor cursor = db.rawQuery("select * from employees where id=" + id + "", null);
-
-        if (cursor.moveToNext() == false) {
-            return ;
-        }
-        String name = cursor.getString(1).toString();
-        String number = cursor.getString(2).toString();
-        String address = cursor.getString(7).toString();
-        String sex = cursor.getString(3).toString();
-        String position = cursor.getString(5).toString();
-        String telNumber = cursor.getString(6).toString();
-        String password = cursor.getString(4).toString();
-
-        imageView.setImageResource(image);
-        textName.setText(name);
-        textNumber.setText(number);
-        textAddress.setText(address);
-        textTelNumber.setText(telNumber);
-        textPosition.setText(position);
-        textSex.setText(sex);
-        textPassword.setText(password);
     }
 
     Runnable getEmployee = new Runnable() {
@@ -114,7 +92,7 @@ public class EmployeeInfoActivity extends AppCompatActivity {
         public void run() {
             Message msg = new Message();
             int id = bundle.getInt("id");
-            String path = "http://192.168.1.41:81/ServerTry/employee?id=" + id;
+            String path = "http://115.159.82.119:8080/Movie/employee/EmployeeQueryId?id=" + id;
 
             try {
                 HttpGet request = new HttpGet(path);
@@ -144,13 +122,13 @@ public class EmployeeInfoActivity extends AppCompatActivity {
             try {
                 array = new JSONArray(val);
                 JSONObject object = (JSONObject) array.get(0);
-                String name = object.getString("name");
-                String number = object.getString("number");
-                String address = object.getString("addr");
-                String sex = object.getString("sex");
-                String position = object.getString("position");
-                String telNumber = object.getString("telNumber");
-                String password = object.getString("password");
+                String name = object.getString("emp_name");
+                String number = object.getString("emp_id");
+                String address = object.getString("emp_addr");
+                String sex = object.getString("emp_sex");
+                String position = object.getString("emp_position");
+                String telNumber = object.getString("emp_tel_num");
+                String password = object.getString("emp_password");
 
                 imageView.setImageResource(image);
                 textName.setText(name);
@@ -162,6 +140,8 @@ public class EmployeeInfoActivity extends AppCompatActivity {
                 textPassword.setText(password);
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(EmployeeInfoActivity.this, "获取员工信息失败", Toast.LENGTH_SHORT).show();
+                finish();
             }
             Log.i("员工详细信息", "请求结果为-->" + val);
         }
@@ -210,11 +190,10 @@ public class EmployeeInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("删除操作");
                 sp = getSharedPreferences("SPShared", MODE_PRIVATE);
-                final SharedPreferences.Editor editor = sp.edit();
                 int id = bundle.getInt("id");
-                int i = sp.getInt("ID", 0);
-                System.out.println("SP>ID" + i + "---" + id);
                 if (id != sp.getInt("ID", 0)) {
+                   new Thread(deleteEmployee).start();
+
                     try {
                         db.execSQL("delete from employees where id=" + id + "");
                         Toast.makeText(EmployeeInfoActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
@@ -230,6 +209,30 @@ public class EmployeeInfoActivity extends AppCompatActivity {
             }
         });
     }
+
+    Runnable deleteEmployee = new Runnable() {
+        @Override
+        public void run() {
+            int id = bundle.getInt("id");
+            String path = "http://115.159.82.119:8080/Movie/employee/EmployeeDelete?id=" + id;
+            try {
+                HttpGet request = new HttpGet(path);
+                HttpClient client = new DefaultHttpClient();
+                HttpResponse response = client.execute(request);
+
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    String strResult = EntityUtils.toString(response.getEntity());
+                    if (strResult.equals("true")) {
+                        Toast.makeText(EmployeeInfoActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(EmployeeInfoActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     private void getPopupWindow() {
         if (null != popupWindow) {
