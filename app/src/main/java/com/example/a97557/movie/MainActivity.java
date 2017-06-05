@@ -3,7 +3,6 @@ package com.example.a97557.movie;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +25,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -37,6 +39,7 @@ public class MainActivity extends Activity {
     private EditText password;
     private SharedPreferences sp;
     private CheckBox rememberCheckBox;
+    private SharedPreferences.Editor editor;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -48,26 +51,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         CloseActivityClass.exitClient(MainActivity.this);
         setContentView(R.layout.activity_main);
-        db = SQLiteDatabase.openOrCreateDatabase(this.getFilesDir().toString() + "/studios.db3", null);
-        try{
-            db.execSQL("create table studios(id integer primary key autoincrement,name varchar(50),number varchar(10),seats varchar(50),row varchar(10),column varchar(10),movie varchar(50))");
-            db.execSQL("insert into studios(name,number,seats,row,column,movie)values(?,?,?,?,?,?)",new String[]{"1号","1","100","10","10","SUPERMAN"});
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        db = SQLiteDatabase.openOrCreateDatabase(this.getFilesDir().toString() + "/employee.db3", null);
-        try {
-            db.execSQL("create table employees(id integer primary key autoincrement, name varchar(50), number varchar(10), sex varchar(20), password varchar(50), position varchar(20), tel varchar(20), addr varchar(50))");
-            db.execSQL("insert into employees (name,number,sex,password, position,tel,addr)values(?,?,?,?,?,?,?)", new String[]{"zhangtian", "04143110", "male", "123456", "管理员", "18092512006", "陕西 西安"});
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
 
         sp = getSharedPreferences("SPShared", MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sp.edit();
+        editor = sp.edit();
         button = (Button) findViewById(R.id.login);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
@@ -84,42 +70,6 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 new Thread(networkTask).start();
-
-               //db.execSQL("insert into employee values(?,?,?)", new String[]{"zhangTian", "123456", "female"});
-
-                String name = username.getText().toString();
-                String pass = password.getText().toString();
-                Cursor cursor = db.rawQuery("select * from employees where name='" + name + "'", null);
-                while (true) {
-                    if (!cursor.moveToNext()) {
-                        break;
-                    }
-
-                    String p = cursor.getString(4);
-                    int id = cursor.getInt(0);
-                    String position = cursor.getString(5);
-                    if (p.equals(pass)) {
-                        if (position.equals("管理员")) {
-                            editor.putString("USERNAME", name);
-                            editor.putString("PASSWORD", pass);
-                            editor.putInt("ID", id);
-                            if (rememberCheckBox.isChecked()) {
-                                editor.putBoolean("REMEMBER_USER", true);
-                            }
-                            editor.commit();
-                            Intent in = new Intent(MainActivity.this, HomeActivity.class);
-                            startActivity(in);
-                            finish();
-                            return;
-                        } else {
-                            Toast.makeText(MainActivity.this, "您不是管理员，不能登录！", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-                }
-
-                Toast.makeText(MainActivity.this, "登录失败！用户名或密码错误！", Toast.LENGTH_SHORT).show();
-
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -166,10 +116,10 @@ public class MainActivity extends Activity {
     Runnable networkTask = new Runnable() {
         @Override
         public void run() {
-            String nameTwo = "张甜";
+            String name = username.getText().toString();
             Message msg = new Message();
             try {
-                String path = "http://192.168.1.41:81/ServerTry/login?name=" + nameTwo;
+                String path = "http://115.159.82.119:8080/Movie/employee/EmployeeQueryName?name=" + name;
                 HttpGet httpRequest = new HttpGet(path);
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpResponse httpResponse = httpclient.execute(httpRequest);
@@ -189,11 +139,41 @@ public class MainActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            String pass = password.getText().toString();
+            String name = username.getText().toString();
             Bundle data = msg.getData();
             String val = data.getString("value");
-            Log.i("mylog", "请求结果为-->" + val);
-            // TODO
-            // UI界面的更新等相关操作
+            try {
+                JSONArray results = new JSONArray(val);
+                for(int i = 0; i < results.length(); i ++) {
+                    JSONObject object = (JSONObject) results.get(i);
+                    String p = object.getString("emp_password");
+                    int position = Integer.parseInt(object.getString("emp_position"));
+                    int id = object.getInt("emp_id");
+                    if (p.equals(pass)) {
+                        if (position == 1) {
+                            editor.putString("USERNAME", name);
+                            editor.putString("PASSWORD", pass);
+                            editor.putInt("ID", id);
+                            if (rememberCheckBox.isChecked()) {
+                                editor.putBoolean("REMEMBER_USER", true);
+                            }
+                            editor.commit();
+                            Intent in = new Intent(MainActivity.this, HomeActivity.class);
+                            startActivity(in);
+                            finish();
+                            return;
+                        } else {
+                            Toast.makeText(MainActivity.this, "您不是管理员，不能登录！", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+
+                    Toast.makeText(MainActivity.this, "登录失败！用户名或密码错误！", Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     };
 }
