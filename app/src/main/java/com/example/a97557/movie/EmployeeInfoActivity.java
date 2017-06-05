@@ -193,15 +193,6 @@ public class EmployeeInfoActivity extends AppCompatActivity {
                 int id = bundle.getInt("id");
                 if (id != sp.getInt("ID", 0)) {
                    new Thread(deleteEmployee).start();
-
-                    try {
-                        db.execSQL("delete from employees where id=" + id + "");
-                        Toast.makeText(EmployeeInfoActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(EmployeeInfoActivity.this, "删除失败",Toast.LENGTH_SHORT).show();
-                    }
                 } else {
                     Toast.makeText(EmployeeInfoActivity.this, "不能删除自己信息！",Toast.LENGTH_SHORT).show();
                 }
@@ -225,6 +216,8 @@ public class EmployeeInfoActivity extends AppCompatActivity {
                     if (strResult.equals("true")) {
                         Toast.makeText(EmployeeInfoActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                         finish();
+                    } else {
+                        Toast.makeText(EmployeeInfoActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
                     }
                 }
             } catch (IOException e) {
