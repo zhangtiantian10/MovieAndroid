@@ -6,6 +6,8 @@ public class Play {
     private String language;
     private String type;
     private int imageId;
+    private String introduction;
+    private String playStatus;
     public Play() {
 
     }
@@ -48,5 +50,21 @@ public class Play {
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public String getPlayStatus() {
+        return playStatus;
+    }
+
+    public void setPlayStatus(String playStatus) {
+        this.playStatus = playStatus;
     }
 }

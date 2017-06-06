@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#eee">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -32,8 +33,81 @@
             android:background="@drawable/dian"
             android:id="@+id/three_points"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:orientation="horizontal"
+            android:background="#000">
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="200dp"
+                android:id="@+id/play_image"
+                android:src="@drawable/play"
+                android:layout_marginTop="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="神奇女侠"
+                    android:id="@+id/play_name"
+                    android:textColor="#fff"
+                    android:textSize="25dp"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:text="派蒂·杰金斯"
+                    android:id="@+id/play_editor"
+                    android:textColor="#fff"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:text="动作,冒险,奇幻"
+                    android:textColor="#fff"
+                    android:id="@+id/play_type"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:text="英语"
+                    android:id="@+id/play_language"
+                    android:textColor="#fff"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:text="142分钟"
+                    android:id="@+id/play_time"
+                    android:textColor="#fff"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:textColor="#fff"
+                    android:text="2017-6-10上映"
+                    android:id="@+id/play_date"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:textColor="#fff"
+                    android:text="25元"
+                    android:id="@+id/play_price"
+                    android:layout_marginTop="5dp"/>
+            </LinearLayout>
+        </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/play_id"/>
+        android:id="@+id/play_introduction"
+        android:textColor="#000"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="盖尔·加朵,克里斯·派恩,罗宾·怀特,丹尼·休斯顿,大卫·休里斯,康妮·尼尔森,埃琳纳·安娜亚,艾文·布莱纳,露茜·戴维斯,萨伊德·塔格马奥,尤金·布雷·洛克,丽莎·洛文·孔斯利,艾米丽·卡蕾,莉莉·阿斯佩尔,詹姆斯·卡沙莫,安·沃尔夫,Ann Ogbomo,佛罗伦萨·卡松巴,杜晨·克洛斯,萨曼塔·若,沃尔夫·凯勒,Dino Fazzani,Miroslav Zaruba,马科·莱特,Roman Green,乌利·阿克曼,Alexander Mercury,Martavious Grayles,Lee Neville,安东尼·J·桑科,Yves O'Hara,Annarie Boor,Shane Griffin,大卫·乔治乌,Jolie " />
 </LinearLayout>
