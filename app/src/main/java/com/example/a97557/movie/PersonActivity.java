@@ -104,6 +104,12 @@ public class PersonActivity extends AppCompatActivity {
                 String telNumber = object.getString("emp_tel_num");
                 String password = object.getString("emp_password");
 
+                if (position.equals("1")) {
+                    position = "经理";
+                } else {
+                    position = "售票员";
+                }
+
                 imageView.setImageResource(R.drawable.head);
                 textName.setText(name);
                 textNumber.setText(number);
