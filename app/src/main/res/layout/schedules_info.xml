@@ -3,29 +3,45 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="40dp"
-        android:layout_height="match_parent"
-        android:text="scheduleId"
-        android:id="@+id/schedule_id"/>
-    <TextView
-        android:layout_width="40dp"
-        android:layout_height="match_parent"
-        android:text="studioId"
-        android:id="@+id/studio_id"/>
-    <TextView
-        android:layout_width="40dp"
-        android:layout_height="match_parent"
-        android:text="playId"
-        android:id="@+id/play_id"/>
-    <TextView
+    <ImageView
         android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:text="date"
-        android:id="@+id/date"/>
-    <TextView
-        android:layout_width="40dp"
-        android:layout_height="match_parent"
-        android:text="timeId"
-        android:id="@+id/time_id"/>
+        android:layout_height="120dp"
+        android:src="@drawable/play"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="影片名"
+            android:id="@+id/play_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="演出厅"
+            android:id="@+id/studio_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30元"
+            android:id="@+id/play_price"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="date"
+            android:id="@+id/date"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="timeId"
+            android:id="@+id/time_id"/>
+    </LinearLayout>
+
+
 </LinearLayout>

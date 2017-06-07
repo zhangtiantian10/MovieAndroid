@@ -5,7 +5,10 @@ public class Schedule {
     private int studioId;
     private int playId;
     private String date;
-    private int scheduleTimeId;
+    private String studioName;
+    private String playName;
+    private String price;
+    private String startTime;
 
     public Schedule(){
 
@@ -43,11 +46,35 @@ public class Schedule {
         this.date = date;
     }
 
-    public int getScheduleTimeId() {
-        return scheduleTimeId;
+    public String getStudioName() {
+        return studioName;
     }
 
-    public void setScheduleTimeId(int scheduleTimeId) {
-        this.scheduleTimeId = scheduleTimeId;
+    public void setStudioName(String studioName) {
+        this.studioName = studioName;
+    }
+
+    public String getPlayName() {
+        return playName;
+    }
+
+    public void setPlayName(String playName) {
+        this.playName = playName;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 }
