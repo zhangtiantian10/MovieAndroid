@@ -149,7 +149,7 @@ public class StudioActivity extends AppCompatActivity {
         insertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(StudioActivity.this, InsertEmployeeActivity.class);
+                Intent in = new Intent(StudioActivity.this, InsertStudioActivity.class);
                 startActivity(in);
                 popupWindow.dismiss();
             }
@@ -200,7 +200,7 @@ public class StudioActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(StudioActivity.this, EmployeeInfoActivity.class);
+                Intent intent = new Intent(StudioActivity.this, StudioInfoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("image", listBeans.get(position).getImage());
                 bundle.putInt("id", listBeans.get(position).getId());

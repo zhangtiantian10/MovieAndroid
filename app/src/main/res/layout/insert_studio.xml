@@ -1,85 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#3F51B5">
-
-        <ImageView
-            android:id="@+id/back_image"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="13dp"
-            android:background="@drawable/back" />
-
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="18dp"
+            android:text="取消"
+            android:id="@+id/cancel"
+            android:textColor="#fff"/>
         <TextView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="添加"
+            android:textSize="20dp"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:text="影厅资料"
+            android:textColor="#fff"/>
+        <TextView
+            android:layout_width="43dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="18dp"
+            android:text="保存"
             android:textColor="#fff"
-            android:textSize="20dp" />
-
-        <!--<TextView-->
-        <!--android:id="@+id/edit_text"-->
-        <!--android:layout_width="43dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginRight="0dp"-->
-        <!--android:layout_marginTop="18dp"-->
-        <!--android:text="编辑"-->
-        <!--android:textColor="#fff" />-->
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="13dp"
-            android:background="@drawable/dian"
-            android:id="@+id/three_points"/>
+            android:id="@+id/saved"/>
     </LinearLayout>
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/studio_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/s04" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="35dp">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="13dp" />
-
-        <TextView
-            android:id="@+id/employee_name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="信息"
-            android:textColor="#000"
-            android:textSize="17dp" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="13dp" />
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/line1"
 
@@ -87,7 +39,8 @@
 
         android:layout_height="1dp"
 
-        android:background="#abb1b3"/>
+        android:background="#abb1b3"
+        android:layout_marginTop="20dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -95,24 +48,49 @@
         android:layout_marginTop="10dp">
 
         <TextView
+            android:id="@+id/studio_image"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="图片"
+            android:textSize="17dp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/studio_image"
+            android:src="@drawable/head"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#abb1b3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/studio_name"
             android:layout_width="100dp"
             android:layout_height="25dp"
             android:layout_marginLeft="15dp"
             android:text="放映厅名称"
-            android:textSize="17dp"
-            android:id="@+id/textView" />
-
-        <TextView
-            android:id="@+id/studio_name"
+            android:textSize="17dp"/>
+        <EditText
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="1号"
+            android:layout_toRightOf="@id/studio_name"
             android:textSize="17dp"
+            android:background="@null"
             android:textColor="#000"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textView"
-            android:layout_toEndOf="@+id/textView" />
+            android:textCursorDrawable="@null"/>
     </RelativeLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -124,26 +102,31 @@
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:layout_marginTop="10dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="15dp"
-            android:text="放映厅编号"
-            android:textSize="17dp"
-            android:id="@+id/number"/>
 
         <TextView
             android:id="@+id/studio_number"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="14dp"
+            android:text="放映厅号"
+            android:textSize="17dp"
+            android:layout_marginStart="14dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <EditText
+            android:id="@+id/number"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="1"
+            android:layout_toRightOf="@id/studio_number"
             android:textSize="17dp"
+            android:background="@null"
             android:textColor="#000"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/number"
-            android:layout_toEndOf="@+id/number" />
+            android:textCursorDrawable="@null"/>
+
+
     </RelativeLayout>
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -158,23 +141,21 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/seat"
+            android:id="@+id/studio_seats"
             android:layout_width="100dp"
             android:layout_height="25dp"
             android:layout_marginLeft="15dp"
             android:text="座位数"
             android:textSize="17dp"/>
-
-        <TextView
-            android:id="@+id/studio_seats"
+        <EditText
+            android:id="@+id/seats"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="100"
+            android:layout_toRightOf="@id/studio_seats"
             android:textSize="17dp"
+            android:background="@null"
             android:textColor="#000"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/seat"
-            android:layout_toEndOf="@+id/seat" />
+            android:textCursorDrawable="@null"/>
     </RelativeLayout>
 
     <ImageView
@@ -190,20 +171,21 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/row"
+            android:id="@+id/studio_row"
             android:layout_width="100dp"
             android:layout_height="25dp"
             android:layout_marginLeft="15dp"
             android:text="行数"
             android:textSize="17dp"/>
-        <TextView
-            android:id="@+id/studio_row"
+        <EditText
+            android:id="@+id/row"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_toRightOf="@id/row"
-            android:text="10"
+            android:layout_toRightOf="@id/studio_row"
             android:textSize="17dp"
-            android:textColor="#000" />
+            android:background="@null"
+            android:textColor="#000"
+            android:textCursorDrawable="@null"/>
     </RelativeLayout>
 
     <ImageView
@@ -219,24 +201,21 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/column"
+            android:id="@+id/studio_column"
             android:layout_width="100dp"
             android:layout_height="25dp"
             android:layout_marginLeft="15dp"
             android:text="列数"
             android:textSize="17dp"/>
-
-        <TextView
-            android:id="@+id/studio_column"
+        <EditText
+            android:id="@+id/column"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="10"
+            android:layout_toRightOf="@id/studio_column"
             android:textSize="17dp"
+            android:background="@null"
             android:textColor="#000"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/column"
-            android:layout_toEndOf="@+id/column" />
-
+            android:textCursorDrawable="@null"/>
     </RelativeLayout>
 
     <ImageView
@@ -252,20 +231,21 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/movie"
+            android:id="@+id/studio_movie"
             android:layout_width="100dp"
             android:layout_height="25dp"
             android:layout_marginLeft="15dp"
-            android:text="放映电影"
+            android:text="播放影片"
             android:textSize="17dp"/>
-        <TextView
-            android:id="@+id/studio_movie"
+        <EditText
+            android:id="@+id/movie"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_toRightOf="@id/movie"
-            android:text="嘻嘻"
+            android:layout_toRightOf="@id/studio_movie"
             android:textSize="17dp"
-            android:textColor="#000" />
+            android:background="@null"
+            android:textColor="#000"
+            android:textCursorDrawable="@null"/>
     </RelativeLayout>
 
     <ImageView
@@ -275,13 +255,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_marginTop="10dp">
 
-
-    </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"

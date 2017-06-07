@@ -83,9 +83,17 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+//                db = SQLiteDatabase.openOrCreateDatabase(MainActivity.this.getFilesDir().toString() + "/employee.db3", null);
+//                db.execSQL("update employees set name='" + "ok_girl" + "',number='" + "123123" + "',sex='" + "1" + "',password='" + "123456" + "', position='" + "1" + "',tel='" + "123123123" + "',addr='" + "aaaaa" + "' where id='" + "zhangTian" + "'");
+
+
+
+
+
                 new Thread(networkTask).start();
 
-               //db.execSQL("insert into employee values(?,?,?)", new String[]{"zhangTian", "123456", "female"});
+//               db.execSQL("insert into employee values(?,?,?)", new String[]{"zhangTian", "123456", "female"});
+//                db.execSQL("insert into employee values(?,?,?)", new String[]{"chai", "123456", "male"});
 
                 String name = username.getText().toString();
                 String pass = password.getText().toString();
@@ -116,6 +124,7 @@ public class MainActivity extends Activity {
                             return;
                         }
                     }
+
                 }
 
                 Toast.makeText(MainActivity.this, "登录失败！用户名或密码错误！", Toast.LENGTH_SHORT).show();
