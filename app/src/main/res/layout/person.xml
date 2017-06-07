@@ -34,8 +34,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/s04" />
+        android:layout_marginTop="40dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +53,6 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="信息"
             android:textColor="#000"
             android:textSize="17dp" />
 
@@ -91,7 +89,6 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_toRightOf="@id/employee_number"
-            android:text="123"
             android:textSize="17dp"
             android:textColor="#000" />
     </RelativeLayout>
@@ -120,7 +117,6 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_toRightOf="@id/employee_sex"
-            android:text="女"
             android:textSize="17dp"
             android:textColor="#000" />
     </RelativeLayout>
@@ -149,7 +145,6 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_toRightOf="@id/employee_password"
-            android:text="123456"
             android:textSize="17dp"
             android:textColor="#000" />
     </RelativeLayout>
@@ -178,7 +173,6 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_toRightOf="@id/employee_position"
-            android:text="售票员"
             android:textSize="17dp"
             android:textColor="#000" />
     </RelativeLayout>
@@ -207,7 +201,6 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_toRightOf="@id/employee_tel_number"
-            android:text="18092512335"
             android:textSize="17dp"
             android:textColor="#000" />
     </RelativeLayout>
@@ -236,7 +229,6 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_toRightOf="@id/employee_address"
-            android:text="陕西 西安"
             android:textSize="17dp"
             android:textColor="#000" />
     </RelativeLayout>
