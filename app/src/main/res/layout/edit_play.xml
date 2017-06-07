@@ -28,8 +28,8 @@
             android:layout_marginTop="13dp"
             android:layout_marginRight="10dp" />
     </LinearLayout>
-    <TextView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="剧目管理"/>
+        android:id="@+id/play_list"></ListView>
 </LinearLayout>

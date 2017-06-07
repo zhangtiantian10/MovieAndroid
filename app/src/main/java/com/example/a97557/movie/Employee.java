@@ -1,6 +1,6 @@
 package com.example.a97557.movie;
 
-public class ListBean {
+public class Employee {
     private int id;
     private String name;
     private String employeeNumber;
@@ -13,7 +13,7 @@ public class ListBean {
     private int image;
 
 
-    public ListBean() {
+    public Employee() {
     }
 
     public int getId() {

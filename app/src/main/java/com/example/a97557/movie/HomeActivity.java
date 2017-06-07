@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +34,11 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        sp = getSharedPreferences("SPShared", MODE_PRIVATE);
+        String name = sp.getString("USERNAME", "张三");
+        View headView = navigationView.getHeaderView(0);
+        TextView username = (TextView) headView.findViewById(R.id.username);
+        username.setText(name);
     }
 
     @Override
