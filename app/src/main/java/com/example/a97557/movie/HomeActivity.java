@@ -18,6 +18,7 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,5 +111,34 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void changeView(View view) {
+        int id = view.getId();
+        Intent in;
+        switch (id) {
+            case R.id.studio_relative:
+                in = new Intent(HomeActivity.this, StudioActivity.class);
+                startActivity(in);
+                return;
+            case R.id.play_relative:
+                in = new Intent(this, PlayActivity.class);
+                startActivity(in);
+                return;
+            case R.id.schedule_relative:
+                in = new Intent(this, ScheduleActivity.class);
+                startActivity(in);
+                return;
+            case R.id.employee_relative:
+                in = new Intent(this, EmployeeActivity.class);
+                startActivity(in);
+                return;
+            case R.id.person_relative:
+                in = new Intent(this, PersonActivity.class);
+                startActivity(in);
+                return;
+        }
+
+        return;
     }
 }
