@@ -69,55 +69,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-//                db = SQLiteDatabase.openOrCreateDatabase(MainActivity.this.getFilesDir().toString() + "/employee.db3", null);
-//                db.execSQL("update employees set name='" + "ok_girl" + "',number='" + "123123" + "',sex='" + "1" + "',password='" + "123456" + "', position='" + "1" + "',tel='" + "123123123" + "',addr='" + "aaaaa" + "' where id='" + "zhangTian" + "'");
-
-
-
-
-
                 new Thread(networkTask).start();
-//<<<<<<< HEAD
-//
-////               db.execSQL("insert into employee values(?,?,?)", new String[]{"zhangTian", "123456", "female"});
-////                db.execSQL("insert into employee values(?,?,?)", new String[]{"chai", "123456", "male"});
-//
-//                String name = username.getText().toString();
-//                String pass = password.getText().toString();
-//                Cursor cursor = db.rawQuery("select * from employees where name='" + name + "'", null);
-//                while (true) {
-//                    if (!cursor.moveToNext()) {
-//                        break;
-//                    }
-//
-//                    String p = cursor.getString(4);
-//                    int id = cursor.getInt(0);
-//                    String position = cursor.getString(5);
-//                    if (p.equals(pass)) {
-//                        if (position.equals("管理员")) {
-//                            editor.putString("USERNAME", name);
-//                            editor.putString("PASSWORD", pass);
-//                            editor.putInt("ID", id);
-//                            if (rememberCheckBox.isChecked()) {
-//                                editor.putBoolean("REMEMBER_USER", true);
-//                            }
-//                            editor.commit();
-//                            Intent in = new Intent(MainActivity.this, HomeActivity.class);
-//                            startActivity(in);
-//                            finish();
-//                            return;
-//                        } else {
-//                            Toast.makeText(MainActivity.this, "您不是管理员，不能登录！", Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
-//                    }
-//
-//                }
-//
-//                Toast.makeText(MainActivity.this, "登录失败！用户名或密码错误！", Toast.LENGTH_SHORT).show();
-//
-//=======
-//>>>>>>> 7b6ac6e1d2178ad6f57e28fe3a39c1680c95bdbe
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.

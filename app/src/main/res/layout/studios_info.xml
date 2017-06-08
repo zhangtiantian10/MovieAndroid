@@ -8,7 +8,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:id="@+id/imageView2"
+        android:id="@+id/image_studio"
         />
 
     <LinearLayout
@@ -25,36 +25,45 @@
                 android:layout_height="wrap_content"
                 android:text="放映厅："/>
             <TextView
-                android:layout_width="40dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:text="1号"
-                android:id="@+id/studio_number"/>
+                android:id="@+id/studio_name"/>
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:text="行数："/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:id="@+id/studio_row"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="座位数："/>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:text="100"
                 android:id="@+id/studio_seats"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="正在放映：" />
-
+                android:text="列数："
+                android:paddingLeft="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="哈哈哈哈"
-                android:id="@+id/studio_movie" />
+                android:text="10"
+                android:id="@+id/studio_col"/>
         </LinearLayout>
     </LinearLayout>
 

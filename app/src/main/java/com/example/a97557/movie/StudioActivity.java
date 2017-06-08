@@ -2,24 +2,32 @@ package com.example.a97557.movie;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,13 +59,64 @@ public class StudioActivity extends AppCompatActivity {
 
         ponitView = (ImageView) findViewById(R.id.three_points);
 
-        ponitView.setOnClickListener(popClick);
-
         listView = (ListView)findViewById(R.id.studio_list);
 
-        listBeans = getListBeans();
-        setListViewEvent();
+        new Thread(getAllStudios).start();
     }
+
+    Runnable getAllStudios = new Runnable() {
+        @Override
+        public void run() {
+            String path = "http://115.159.82.119:8080/Movie/studio/StudioQueryAll";
+            Message msg = new Message();
+
+            HttpGet request = new HttpGet(path);
+            HttpClient client = new DefaultHttpClient();
+            try {
+                HttpResponse response = client.execute(request);
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    String result = EntityUtils.toString(response.getEntity());
+                    Bundle data = new Bundle();
+                    data.putString("result",result);
+                    msg.setData(data);
+                    Log.i("演出厅：", result);
+                    handler.sendMessage(msg);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    Handler handler = new android.os.Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            String result = data.getString("result");
+            try {
+                JSONArray array = new JSONArray(result);
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject object = (JSONObject) array.get(i);
+                    StudioListBean studio = new StudioListBean();
+                    studio.setStudioName(object.getString("studio_name"));
+                    studio.setStudioColumn(object.getInt("studio_col_count"));
+                    studio.setStudioRow(object.getInt("studio_row_count"));
+                    int seatNumber = object.getInt("studio_col_count") * object.getInt("studio_row_count");
+                    studio.setStudioSeat(seatNumber);
+                    studio.setId(object.getInt("studio_id"));
+                    studio.setImage(R.drawable.seat);
+                    listBeans.add(studio);
+                }
+
+                setListViewEvent();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    };
 
     class ListViewAdapter extends BaseAdapter {
 
@@ -97,99 +156,30 @@ public class StudioActivity extends AppCompatActivity {
                 convertView = LayoutInflater.from(context).inflate(R.layout.studios_info, null);
                 viewHolder = new ViewHolder();
                 //id的绑定
-                viewHolder.imageView = (ImageView)convertView.findViewById(R.id.imageView2);
-                viewHolder.numberView = (TextView)convertView.findViewById(R.id.studio_number);
+                viewHolder.imageView = (ImageView)convertView.findViewById(R.id.image_studio);
+                viewHolder.nameTxet = (TextView)convertView.findViewById(R.id.studio_name);
                 viewHolder.seatView = (TextView)convertView.findViewById(R.id.studio_seats);
-                viewHolder.movieView = (TextView)convertView.findViewById(R.id.studio_movie);
+                viewHolder.colText = (TextView)convertView.findViewById(R.id.studio_col);
+                viewHolder.rowText = (TextView)convertView.findViewById(R.id.studio_row);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             //设置item控件数据的绑定
             viewHolder.imageView.setImageResource(listBeans.get(position).getImage());
-            viewHolder.numberView.setText(listBeans.get(position).getStudioNumber());
-            viewHolder.seatView.setText(listBeans.get(position).getStudioSeat() );
-            viewHolder.movieView.setText(listBeans.get(position).getStudioMovie());
+            viewHolder.nameTxet.setText(listBeans.get(position).getStudioName());
+            viewHolder.seatView.setText(listBeans.get(position).getStudioSeat()+"" );
+            viewHolder.colText.setText(listBeans.get(position).getStudioColumn() + "");
+            viewHolder.rowText.setText(listBeans.get(position).getStudioRow() + "");
             return convertView;
         }
         public class ViewHolder {
             private ImageView imageView;
-            private TextView numberView;
+            private TextView nameTxet;
             private TextView seatView;
-            private TextView movieView;
+            private TextView colText;
+            private TextView rowText;
         }
-    }
-
-    View.OnClickListener popClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            getPopupWindow();
-            popupWindow.showAsDropDown(v);
-        }
-    };
-    /**
-     * 创建PopupWindow
-     */
-    protected void initPopuptWindow() {
-        View popupWindow_view = getLayoutInflater().inflate(R.layout.employee_pop, null,
-                false);
-        popupWindow = new PopupWindow(popupWindow_view, 300, 240, true);
-        popupWindow_view.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (popupWindow != null && popupWindow.isShowing()) {
-                    popupWindow.dismiss();
-                    popupWindow = null;
-                }
-                return false;
-            }
-        });
-        Button insertButton = (Button) popupWindow_view.findViewById(R.id.insert);
-        Button searchButton = (Button) popupWindow_view.findViewById(R.id.search);
-        insertButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(StudioActivity.this, InsertStudioActivity.class);
-                startActivity(in);
-                popupWindow.dismiss();
-            }
-        });
-// 保存
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(StudioActivity.this, "搜索",Toast.LENGTH_SHORT).show();
-
-                finish();
-                popupWindow.dismiss();
-            }
-        });
-    }
-
-    public List<StudioListBean> getListBeans() {
-
-        List<StudioListBean> lists = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from studios", null);
-        while (true) {
-            if (cursor.moveToNext() == false) {
-                break;
-            }
-            StudioListBean bean = new StudioListBean();
-            bean.setId(cursor.getInt(0));
-            bean.setImage(R.drawable.head);
-            bean.setStudioName(cursor.getString(1).toString());
-            bean.setStudioNumber(cursor.getString(2).toString());
-            bean.setStudioSeat(cursor.getString(3).toString());
-            bean.setStudioRow(cursor.getString(4).toString());
-            bean.setStudioColumn(cursor.getString(5).toString());
-            bean.setStudioMovie(cursor.getString(6).toString());
-            Log.i("mmp","studioNumber: "+bean.getStudioNumber());
-            lists.add(bean);
-            String s = bean.getStudioName();
-            Log.i("mmp","studioName: "+s);
-        }
-
-        return lists;
     }
 
     public void setListViewEvent() {
@@ -204,25 +194,13 @@ public class StudioActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putInt("image", listBeans.get(position).getImage());
                 bundle.putInt("id", listBeans.get(position).getId());
+                bundle.putInt("col", listBeans.get(position).getStudioColumn());
+                bundle.putString("name", listBeans.get(position).getStudioName());
+                bundle.putInt("row", listBeans.get(position).getStudioRow());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
-    }
-
-    private void getPopupWindow() {
-        if (null != popupWindow) {
-            popupWindow.dismiss();
-            return;
-        } else {
-            initPopuptWindow();
-        }
-    }
-
-    protected void onRestart() {
-        super.onRestart();
-        listBeans = getListBeans();
-        setListViewEvent();
     }
 }
 

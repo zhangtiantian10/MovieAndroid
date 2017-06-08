@@ -8,10 +8,10 @@ public class StudioListBean {
     private int id;
     private String studioName;
     private String studioMovie;
-    private String studioSeat;
+    private int studioSeat;
     private String studioNumber;
-    private String studioRow;
-    private String studioColumn;
+    private int studioRow;
+    private int studioColumn;
     private String studioPosition;
     private int image;
 
@@ -34,19 +34,19 @@ public class StudioListBean {
         this.studioMovie = studioMovie;
     }
 
-    public String getStudioColumn() {
+    public int getStudioColumn() {
         return studioColumn;
     }
 
-    public void setStudioColumn(String studioColumn) {
+    public void setStudioColumn(int studioColumn) {
         this.studioColumn = studioColumn;
     }
 
-    public String getStudioRow() {
+    public int getStudioRow() {
         return studioRow;
     }
 
-    public void setStudioRow(String studioRow) {
+    public void setStudioRow(int studioRow) {
         this.studioRow = studioRow;
     }
     public String getStudioName() {
@@ -65,11 +65,11 @@ public class StudioListBean {
         this.studioPosition = studioPosition;
     }
 
-    public String getStudioSeat() {
+    public int getStudioSeat() {
         return studioSeat;
     }
 
-    public void setStudioSeat(String studioSeat) {
+    public void setStudioSeat(int studioSeat) {
         this.studioSeat = studioSeat;
     }
 
